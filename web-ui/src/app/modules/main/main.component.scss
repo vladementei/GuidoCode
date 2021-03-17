@@ -1,0 +1,50 @@
+@import "src/assets/themes/styles.scss";
+
+.nav-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 80%;
+
+  &-link {
+    padding: 30px;
+    border: 1px solid $border-primary-dark;
+    box-sizing: border-box;
+    text-align: center;
+    min-height: 50px;
+    flex: 0 1 48%;
+    margin: 15px auto;
+    background-color: $background-primary-light;
+    border-radius: 5px;
+    font-size: 30px;
+    white-space: nowrap;
+    min-width: 430px;
+    color: $text-primary-dark;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 0 0 5px $background-primary-dark;
+      text-decoration: none;
+      color: $text-primary-dark;
+    }
+  }
+
+  a.nav-menu-link {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    .fa {
+      font-size: 70px;
+      margin-right: 30px;
+    }
+  }
+
+  .opacity {
+    opacity: 0.6;
+  }
+}
+
+.page-limiter {
+  margin: auto;
+}

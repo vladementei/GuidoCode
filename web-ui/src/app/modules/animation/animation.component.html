@@ -1,0 +1,88 @@
+<div class="animation" [ngClass]="{'_center-align': !music}">
+
+  <div class="actions"
+       [ngClass]="{'jus-cont': !!music}">
+    <div class="file-processor action-wrapper"
+         [ngClass]="{'_big': !music}"
+         (click)="upload.click()">
+      <i class="fa fas fa-file-upload control-button"></i>
+      <div class="file-processor-title">Upload MIDI</div>
+      <input #upload
+             type="file"
+             accept="audio/mid"
+             (change)="uploadMidi($event.target.files[0])"/>
+    </div>
+
+    <div *ngIf="music" class="d-flex">
+      <div class="action-wrapper" (click)="animate()">
+        <img class="control-button"
+             src="assets/img/play-begin.svg" alt="Animate">
+      </div>
+      <div *ngIf="isAnimationWorks !== undefined"
+           (click)="pause()"
+           class="action-wrapper">
+        <img class="control-button"
+             [src]="'assets/img/' + (isAnimationWorks ? 'pause' : 'play') + '.svg'"
+             [alt]="isAnimationWorks ? 'Pause' : 'Resume'">
+      </div>
+      <div class="action-wrapper instrument-wrapper">
+        <img class="control-button instrument"
+             src="assets/img/piano.svg" alt="Piano"
+             [ngClass]="{'_selected': selectedInstrument === instruments.PIANO}"
+             (click)="selectedInstrument = instruments.PIANO">
+        <img class="control-button instrument"
+             src="assets/img/violin.svg" alt="Violin"
+             [ngClass]="{'_selected': selectedInstrument === instruments.VIOLIN}"
+             (click)="selectedInstrument = instruments.VIOLIN">
+        <img class="control-button instrument"
+             src="assets/img/guitar.svg" alt="Guitar"
+             [ngClass]="{'_selected': selectedInstrument === instruments.GUITAR}"
+             (click)="selectedInstrument = instruments.GUITAR">
+      </div>
+    </div>
+
+    <div class="file-processor action-wrapper"
+         *ngIf="music"
+         (click)="downloadMidi()">
+      <i class="fa fas fa-file-download control-button"></i>
+      <div class="file-processor-title">Download MIDI</div>
+    </div>
+  </div>
+  <ng-container *ngIf="music">
+    <div class="music-sheet-wrapper">
+      <div #musicSheet id="musicSheet" class="music-sheet"></div>
+    </div>
+    <div class="actions" style="min-height: 40px; margin-top: 10px">
+      <div *ngIf="selectedNoteView && !this.isEditing" class="action-wrapper" (click)="isEditing = true; newNoteValueControl.setValue(this.music.slice(selectedNote?.startChar, selectedNote?.endChar)?.trim() || '');">
+        <img class="control-button"
+             src="assets/img/edit.svg" alt="Edit">
+      </div>
+
+      <ng-container *ngIf="this.isEditing">
+        <div class="action-wrapper" (click)="cancelEditor()">
+          <img class="control-button"
+               src="assets/img/cross.png" alt="Save">
+        </div>
+
+        <div class="action-editor">
+          <input [formControl]="newNoteValueControl"
+                 type="text">
+        </div>
+
+        <div class="action-wrapper" style="padding: 0; border: 0; width: auto; min-width: 72px">
+          <div *ngIf="newNoteValueControl.valid" class="action-wrapper" (click)="saveChanges()">
+            <img class="control-button"
+                 src="assets/img/tick.png" alt="Cancel">
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="music-editor">
+        <textarea #musicInput name="musicInput" id="musicInput" cols="80" rows="8"
+                  (keydown)="isMobileView ? onMusicChange() : null">
+          {{this.music}}
+        </textarea>
+    </div>
+    <div id="warnings"></div>
+  </ng-container>
+</div>

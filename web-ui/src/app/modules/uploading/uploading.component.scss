@@ -1,0 +1,21 @@
+@import "src/assets/themes/styles.scss";
+
+.uploading {
+  margin: auto;
+
+  .image-preview {
+    margin-bottom: 30px;
+    padding: 10px;
+    background-color: $background-primary-dark;
+    border-radius: 20px;
+    min-height: 300px;
+    display: flex;
+
+    img {
+      margin: auto;
+      max-height: 550px;
+      color: $text-primary-light;
+    }
+  }
+}
+

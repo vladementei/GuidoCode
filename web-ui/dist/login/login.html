@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+    html, body {
+      margin: 0;
+      height: 100vh;
+    }
+
+    body {
+      background-image: url("../web-ui/assets/img/background.jpg");
+      background-size: cover;
+      padding: 0 20px;
+      display: flex;
+    }
+
+    .container {
+      display: flex;
+      width: fit-content;
+      margin: auto;
+    }
+
+    .app-title {
+      color: white;
+      font-family: cursive;
+      margin-right: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-title .trial {
+      font-size: 37px;
+      /*color: wheat;*/
+      color: ghostwhite;
+      /*color: deepskyblue;*/
+      margin-top: auto;
+      margin-bottom: 26px;
+      text-decoration: underline;
+      text-underline-offset: 1px;
+    }
+
+    .form-container {
+      background-color: ghostwhite;
+      border-radius: 20px;
+      width: fit-content;
+      padding: 40px 70px 30px;
+    }
+
+    .form-container .label {
+      font-family: cursive;
+      margin-bottom: 4px;
+      font-size: 15px;
+      color: darkslategrey;
+    }
+
+    input {
+      width: 225px;
+      padding: 7px 15px;
+      font-size: 14px;
+      border-radius: 3px;
+      border-color: slategrey;
+      border-width: 1px;
+      border-style: solid;
+      outline: none;
+    }
+
+    button {
+      border: 1px solid transparent;
+      outline: none;
+      font-size: 14px;
+      text-decoration: none;
+      color: white;
+      border-radius: 10px;
+      background-color: lightslategray;
+      padding: 7px 20px;
+    }
+
+    button:hover {
+      background-color: slategray;
+    }
+
+    .error-message {
+      color: red;
+      margin-left: 22px;
+    }
+
+    .auth-type {
+      font-size: 18px;
+      color: darkslategrey;
+      margin: auto -40px auto auto;
+      font-family: cursive;
+    }
+  </style>
+  <script>
+    checkErrors = () => {
+      <%if (error) { %>
+        setTimeout(() => alert('<%= error%>'), 100);
+      <%}%>
+    }
+  </script>
+</head>
+<body onload="checkErrors()">
+<div class="container">
+  <div class="app-title">
+    <div style="font-size: 70px">GuidoCode</div>
+    <div style="font-size: 30px;">Music Recognition</div>
+    <a href="/login" class="trial">Try for free !</a>
+  </div>
+  <div class="form-container">
+    <% if (login) { %>
+      <form action="/login" method="post">
+    <% } %>
+    <% if (!login) { %>
+      <form action="/registration" method="post">
+    <% } %>
+      <div style="display: grid; grid-row-gap: 15px">
+        <div>
+          <div class="label">Username</div>
+          <input type="text" name="username" required>
+        </div>
+
+        <div>
+          <div class="label">Password</div>
+          <input type="password" name="password" required>
+        </div>
+
+        <div style="margin-top: 15px; display: flex">
+          <%if (login) { %>
+            <button type="submit">Login</button>
+            <a class="auth-type" href="/registration">Sign up</a>
+          <%}%>
+          <%if (!login) { %>
+            <button type="submit">Register/button>
+            <a class="auth-type" href="/">Sign in</a>
+          <%}%>
+<!--          <% if (error) { %>-->
+<!--            <span class="error-message"><%= error%></span>-->
+<!--          <% } %>-->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

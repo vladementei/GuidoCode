@@ -1,0 +1,6 @@
+<div class="nav-menu page-limiter">
+  <a (click)="navigate(link)" *ngFor="let link of NAV_LINKS" class="nav-menu-link {{link.opacity}}">
+    <i class="fa {{link.icon}}"></i>
+    <span>{{link.name}}</span>
+  </a>
+</div>

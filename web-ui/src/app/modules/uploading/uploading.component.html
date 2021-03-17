@@ -1,0 +1,14 @@
+<div class="uploading">
+  <div class="image-preview">
+    <img [src]="imageSrc" alt="No image selected...">
+  </div>
+  <input type="file"
+         accept="image/png, image/jpeg"
+         (change)="previewFile($event.target.files[0])"
+  >
+  <button mat-button [disabled]="!selectedFile" (click)="uploadImage()">Upload image</button>
+</div>
+<div *ngIf="(loader$ | async)" class="loader">
+  <mat-spinner [diameter]="100"></mat-spinner>
+</div>
+<!--<a href="{{ url_for('animation') }}">Show animation</a>-->

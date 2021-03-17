@@ -1,0 +1,5 @@
+<app-header *ngIf="!(isEmbedded$ | async)"></app-header>
+<div class="content-wrapper" [ngClass]="{'embedded': (isEmbedded$ | async)}">
+  <router-outlet></router-outlet>
+</div>
+<app-footer *ngIf="!(isEmbedded$ | async)"></app-footer>

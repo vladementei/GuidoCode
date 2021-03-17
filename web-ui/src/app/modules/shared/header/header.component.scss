@@ -1,0 +1,22 @@
+@import "src/assets/themes/styles.scss";
+
+.header {
+  background-color: $background-transparent;
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+
+  .logo {
+    height: 40px;
+    margin: auto 0 auto 30px;
+    cursor: pointer;
+
+  }
+
+  .user {
+    font-size: 40px;
+    margin: auto 20px;
+    cursor: pointer;
+    color: $text-primary-light;
+  }
+}

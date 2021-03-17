@@ -1,0 +1,13 @@
+@import "src/assets/themes/styles.scss";
+
+.footer {
+  background-color: $background-transparent;
+  height: 50px;
+  display: flex;
+
+  .corporation {
+    color: $text-primary-light;
+    font-size: 16px;
+    margin: auto;
+  }
+}
