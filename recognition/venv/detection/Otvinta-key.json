@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "otvinta",
+  "private_key_id": "fcd8d18897ab339ec469e6b5716ad4763494c1ba",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDK2MOL3hJzQbKu\nGMgnDND7v0qLyKtWLSMBGx4kYCly9NDqNV89o2GSTVgjA+N0rlgMExyYMlpopOJH\nFA+WvSLwRfUzyDbxDt7cKl58ZjxjLMPUgGjWBbi5rwVS7YRv8ue/8fpMRS5rOmN+\nMgLG/OTPIz5CeC43FnPRJdOett+TU03rKgXGf3xt7Yxz8BDOOrk/ACfXhgAGiv5d\n+GzNVvFUuCSkGyCgwcyW/p50etBa6oqnjtljJYpyoD/7Mt5XWqe+xNnEYqDPMW5u\nOfAUplO6GxnilDfWewhkBM2/p6PwZAiZqQR+YlC4M5mnbIRF+2b0G0BJh6F0QfQv\nZU++7Ea/AgMBAAECggEAJAnR6Boaxg5gi+zMNp/gyzFHscEDq8pWIz6posXQ52MW\ncN3tn1pVHfSO2Z25vgOxkeedV27uwBO3PfCS+nF88RpEv5/tHvPI5W3Dnq9dQDN2\nUV1FAu0+TgMJ25tmQatywBfiI8XQwu07OvLwqmDI2AJHb/DBKTlcd0aUq+iKnTZJ\nGGYoQ6qyZAhZETWe1XxK9scrrvPqYsfvhNe5Mkmw/kB6f6sPs7sJI/mm5I7mbNrQ\n/3o1QXO3tf8kmKnBzuStjSE5mbd8dQ6eD3F9lZAi8ZdgRk9p5tHol3XvioHLySs2\n5G4NoLCGKUa9yqS93yNtOK8rxUS6TnzsWfdYghDEQQKBgQDvwqQmarZs3UBRwbXE\ngFFUuKesJYO8l5zo9HCvwIbZncZXInU725lBDdgZjRMco4cPeXoeBVY4fKUmyvcg\n6kRNrkRE6B75XEDXnS5a2dHy7cXkfShhD4SPcQIHH3Hh3kx53cFUTubnCU5lU6wc\ngggfT1NNLc+iM/870Hm+4l8Y/wKBgQDYlg3gozs/Gx7aeJBf03dLdWbt3l1NWEx/\nhia+fWtVT6Q6lAymhRhuiQi69tJ62oda/DunZi/ygz9XraieKHIaTsuEeIJxmmHI\nvFJj0F20q/YvkM63+t26hBPITE1SOd2ZiYYtQByOJvdA+6D/TJQ2lze9tyFmFpSD\neUF07fsSQQKBgQC6ZEICz7EUfwjSxlpN8kfIKmnHrb51bhSBEg9MwsrTARJBiTtE\nlprU9TNL4d26xPJpuFGUZye5cEVgHCf1Qcpp7ZGLVD1INE0AkmSIIpBSYEEZOaeb\nlVnDveIKsYpyQsSHdTsoFNLzR8vXgC3sV7aCyMOE25lwiyXgVVlgaVHu9wKBgEeh\noSdZdR/S7WpeE4nN25eWVZt4Pq109Z/7k1bPDi+h7nP9QQ3V2RW9tqh3N3ewTLH3\n2BbuQg9X/xwVcD4WrF4tDzxZyvKdl5eXSTx/zm4RrZNfti69BpZIVm6ZZb07LCI6\njKjsmkUdeAsC7eVhw2cmriXNqnskHqw470An8TDBAoGAIkuxomOG11x78eeC47+9\n7B4rKLRvuoFu4Lz570m/egWmHq43ysSTuQqsRQIJpstk5v/ee4GJDwaaNNu5z5S+\nGJmFeHaIufIrHTkSyqKCcE70DY2JNySPwJACMCGLKwYUC4ZFSF/AXfkSEt8ZcDL4\nx7AtKc5Y+Mk2HNc9rW0MTRw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "music-server@otvinta.iam.gserviceaccount.com",
+  "client_id": "110564679030105387744",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/music-server%40otvinta.iam.gserviceaccount.com"
+}

@@ -1,0 +1,11 @@
+# Dependencies
+- pip install gspread oauth2client
+- pip install --upgrade tensorflow==1.4.0
+- pip install opencv-python
+- pip install keras==2.1.5
+- pip install imageai --upgrade
+- pip install -U Flask
+- pip install flask-ngrok
+- pip install midiutil
+- pip install imutils
+- pip install scikit-image
