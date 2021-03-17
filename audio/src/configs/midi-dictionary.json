@@ -1,0 +1,111 @@
+{
+  "note": {
+    "60": {
+      "sound": "C5",
+      "display": "C"
+    },
+    "61": {
+      "sound": "C#5",
+      "display": "^C"
+    },
+    "62": {
+      "sound": "D5",
+      "display": "D"
+    },
+    "63": {
+      "sound": "D#5",
+      "display": "^D"
+    },
+    "64": {
+      "sound": "E5",
+      "display": "E"
+    },
+    "65": {
+      "sound": "F5",
+      "display": "F"
+    },
+    "66": {
+      "sound": "F#5",
+      "display": "^F"
+    },
+    "67": {
+      "sound": "G5",
+      "display": "G"
+    },
+    "68": {
+      "sound": "G#5",
+      "display": "^G"
+    },
+    "69": {
+      "sound": "A5",
+      "display": "A"
+    },
+    "70": {
+      "sound": "A#5",
+      "display": "^A"
+    },
+    "71": {
+      "sound": "B5",
+      "display": "B"
+    },
+    "72": {
+      "sound": "C6",
+      "display": "c"
+    },
+    "73": {
+      "sound": "C#6",
+      "display": "^c"
+    },
+    "74": {
+      "sound": "D6",
+      "display": "d"
+    },
+    "75": {
+      "sound": "D#6",
+      "display": "^d"
+    },
+    "76": {
+      "sound": "E6",
+      "display": "e"
+    },
+    "77": {
+      "sound": "F6",
+      "display": "f"
+    },
+    "78": {
+      "sound": "F#6",
+      "display": "^f"
+    },
+    "79": {
+      "sound": "G6",
+      "display": "g"
+    },
+    "80": {
+      "sound": "G#6",
+      "display": "^g"
+    },
+    "81": {
+      "sound": "A6",
+      "display": "a"
+    },
+    "82": {
+      "sound": "A#6",
+      "display": "^a"
+    },
+    "83": {
+      "sound": "B6",
+      "display": "b"
+    }
+  },
+  "duration": {
+    "480": {
+      "display": "4"
+    },
+    "240": {
+      "display": "2"
+    },
+    "192": {
+      "display": "2"
+    }
+  }
+}
