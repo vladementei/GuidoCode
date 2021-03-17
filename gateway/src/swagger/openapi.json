@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Gateway API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Converter API functions",
+      "description": "Converter API functions of Notes recognition"
+    }
+  ],
+  "paths": {
+    "/converter/{id}": {
+      "get": {
+        "summary": "Return simple string",
+        "tags": [
+          "Converter API functions"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "simple parameter",
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "description": "parameter id just for test",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "document": {
+                "schema": {
+                  "type": "string",
+                  "example": "some text"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/converter/notes": {
+      "post": {
+        "summary": "Converts MIDI file to notes",
+        "tags": [
+          "Converter API functions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": "true",
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "required": "true",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "desc",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/converter/midi": {
+      "post": {
+        "summary": "Converts midi notes to MIDI file",
+        "tags": [
+          "Converter API functions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Song": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
