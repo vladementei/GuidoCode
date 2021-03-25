@@ -64,7 +64,7 @@ export class ConverterController {
     @Post(`${AppRoutes.CONVERTER}/${ConverterRoutes.MIDI}`)
     midiFromNotes(@Body() notes: string) {
         return new Promise((resolve, reject) => {
-            resolve(axios.post(`http://localhost:8081/midi/midi`, notes)
+            resolve(axios.post(`http://localhost:8081/midi/midi`, notes, {headers: {"Content-Type": "text/plain"}})
                 .then(response => response.data)
                 .catch(({response}) => {
                     throw new AudioServerError(response.data.error);
