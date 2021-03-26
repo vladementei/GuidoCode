@@ -6,6 +6,8 @@ import {AppRoutes} from "../constants";
 import * as midiParser from "midi-parser-js";
 import * as MidiWriter from "midi-writer-js";
 import {midiToNotes} from "../services/midi-to-notes.function";
+import {notestoMidi} from "../services/notes-to-midi.function";
+import * as jsonNotes from '../configs/note-dictionary.json';
 
 const fs = require("fs");
 
@@ -42,13 +44,16 @@ export class MidiController {
     getMidiFromNotes(@Body() notes: string) {
         return new Promise((resolve, reject) => {
             //TODO process of conversion notes to midi file
-            const track = new MidiWriter.Track();
-            track.addTrackName("Music");
-            track.setTempo(60);
-            track.addEvent(new MidiWriter.NoteEvent({pitch: ['C4'], duration: '4', channel: 0, velocity: 80, startTick: 0}));
-            const write = new MidiWriter.Writer(track);
-            const file = write.buildFile();
-            resolve(file);
+            //  const filemidi=notestoMidi(notes);
+
+            /* const track = new MidiWriter.Track();
+             track.addTrackName("Music");
+             track.setTempo(60);
+             track.addEvent(new MidiWriter.NoteEvent({pitch: ['C4'], duration: '4', channel: 0, velocity: 80, startTick: 0}));
+             const write = new MidiWriter.Writer(track);
+             const file = write.buildFile();
+             resolve(file);*/
+            resolve(notestoMidi(notes));
         });
     }
 }
