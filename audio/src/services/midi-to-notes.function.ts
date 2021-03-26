@@ -13,7 +13,7 @@ export function midiToNotes(midiArray: any): string {
             const dlit: string = jsonMidi.duration[midiArray.track[1].event[i].deltaTime].display;
             // @ts-ignore
             notesTxt += jsonMidi.note[midiArray.track[1].event[i].data.slice(0, 1)].display + dlit + ' ';
-            sumDlit += Number.parseInt(dlit);
+            sumDlit += Number.parseInt(dlit || "4");
             if (sumDlit - lastTact >= tactThreshold) {
                 notesTxt += '|';
                 lastTact = sumDlit;
