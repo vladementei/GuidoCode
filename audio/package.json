@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon src/index.ts",
-    "build": "tsc --project ./"
+    "audio:dev": "nodemon src/index.ts",
+    "audio:prod": "node build/index.js",
+    "audio:build": "tsc --project ./"
   },
   "keywords": [],
   "author": "",
