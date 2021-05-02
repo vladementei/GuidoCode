@@ -13,7 +13,7 @@ import {AppRoutes} from "./constants";
 dotenv.config();
 const logger = log4js.getLogger();
 logger.level = process.env.LOG_LEVEL || "error";
-const port = process.env.PORT || 3000;
+const port = parseInt(process.argv[2]) || process.env.PORT || 3000;
 
 const app: Express = express();
 app.use(bodyParser.json())
