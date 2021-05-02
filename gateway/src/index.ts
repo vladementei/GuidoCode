@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import fileUpload from "express-fileupload";
 import {Request, Response} from "express-serve-static-core";
 import {useExpressServer} from 'routing-controllers';
-import {ConverterController} from "./controller";
+import {ConverterController, NodesController} from "./controller";
 import express, {Express} from "express";
 import httpContext from "express-http-context";
 import {GlobalErrorHandler} from "./middleware";
@@ -32,7 +32,7 @@ swaggerDocument.servers[0].url = process.env.URL + ":" + port;
 app.use(AppRoutes.API_DOCS, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 useExpressServer(app, {
-    controllers: [ConverterController],
+    controllers: [ConverterController, NodesController],
     middlewares: [GlobalErrorHandler],
     defaultErrorHandler: false
 });

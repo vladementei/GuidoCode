@@ -13,6 +13,10 @@
     {
       "name": "Converter API functions",
       "description": "Converter API functions of Notes recognition"
+    },
+    {
+      "name": "Nodes API functions",
+      "description": "API functions to manage nodes"
     }
   ],
   "paths": {
@@ -104,6 +108,84 @@
           }
         }
       }
+    },
+    "/nodes/{type}": {
+      "get": {
+        "summary": "Return active nodes by type",
+        "tags": [
+          "Nodes API functions"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "description": "node type",
+            "schema": {
+              "type": "string",
+              "enum": ["audio", "recognition"],
+              "example": "audio"
+            }
+          }
+        ],
+        "description": "API to get active nodes by type",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "document": {
+                "schema": {
+                  "type": "Node[]",
+                  "example": [
+                    {
+                      "type": "audio",
+                      "url": "http://localhost:3000"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/nodes/{create-type}": {
+      "post": {
+        "summary": "Create new nodes by type",
+        "tags": [
+          "Nodes API functions"
+        ],
+        "parameters": [
+          {
+            "name": "create-type",
+            "in": "path",
+            "required": true,
+            "description": "node type",
+            "schema": {
+              "type": "string",
+              "enum": ["audio", "recognition"],
+              "example": "audio"
+            }
+          }
+        ],
+        "description": "API to create new active node by type",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "document": {
+                "schema": {
+                  "type": "Node",
+                  "example": {
+                    "type": "audio",
+                    "url": "http://localhost:3000"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -112,6 +194,17 @@
         "type": "object",
         "properties": {
           "length": {
+            "type": "string"
+          }
+        }
+      },
+      "Node": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "url": {
             "type": "string"
           }
         }
