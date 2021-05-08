@@ -18,8 +18,8 @@ export class NodesController {
     }
 
     @Post(`${AppRoutes.NODES}/:${NodesRoutes.NODE_TYPE}`)
-    createNode(@Param(NodesRoutes.NODE_TYPE) id: NodeType, @Body() body: { port: number }): Promise<Node> {
-        return audioNodesService.createNode(body.port)
+    createNode(@Param(NodesRoutes.NODE_TYPE) id: NodeType, @Body() body: { port: number }): Promise<Node[]> {
+        return audioNodesService.createNode(body.port);
     }
 
     @Put(`${AppRoutes.NODES}/:${NodesRoutes.NODE_TYPE}`)

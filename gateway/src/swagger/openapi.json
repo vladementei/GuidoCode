@@ -185,11 +185,13 @@
             "content": {
               "document": {
                 "schema": {
-                  "type": "Node",
-                  "example": {
-                    "type": "audio",
-                    "url": "http://localhost:3000"
-                  }
+                  "type": "Node[]",
+                  "example": [
+                    {
+                      "type": "audio",
+                      "url": "http://localhost:3000"
+                    }
+                  ]
                 }
               }
             }

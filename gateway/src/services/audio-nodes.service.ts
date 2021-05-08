@@ -12,7 +12,7 @@ class AudioNodesService {
         return this.activeNodes;
     }
 
-    public createNode(port: number): Promise<Node> {
+    public createNode(port: number): Promise<Node[]> {
         const audioProcess = spawn('node', ['../audio/build/index.js', port], {
             detached: true
         });
@@ -28,7 +28,7 @@ class AudioNodesService {
                     url: `http://localhost:${port}`
                 }
                 this.connectNode(newNode);
-                resolve(newNode);
+                resolve(this.activeNodes);
             });
 
             audioProcess.once("close", (code: any, signal: any) => {
@@ -47,8 +47,8 @@ class AudioNodesService {
         return new Promise((resolve, reject) => {
             kill(port, "tcp")
                 .then((res: any) => {
+                    this.activeNodes = this.activeNodes.filter(node => !node.url.endsWith(port.toString()));
                     if (!res.code) {
-                        this.activeNodes = this.activeNodes.filter(node => !node.url.endsWith(port.toString()));
                         resolve(this.activeNodes);
                     } else {
                         reject(new HttpError(500, `No nodes on port ${port}`));
