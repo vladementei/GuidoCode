@@ -246,6 +246,56 @@
           }
         }
       }
+    },
+    "/nodes/{kill-type}": {
+      "delete": {
+        "summary": "Kill node by type",
+        "tags": [
+          "Nodes API functions"
+        ],
+        "parameters": [
+          {
+            "name": "kill-type",
+            "in": "path",
+            "required": true,
+            "description": "node type",
+            "schema": {
+              "type": "string",
+              "enum": ["audio", "recognition"],
+              "example": "audio"
+            }
+          }
+        ],
+        "description": "API to kill active node by type",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KillNode"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "document": {
+                "schema": {
+                  "type": "Node[]",
+                  "example": [
+                    {
+                      "type": "audio",
+                      "url": "http://localhost:3000"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -282,6 +332,14 @@
         "properties": {
           "url": {
             "type": "string"
+          }
+        }
+      },
+      "KillNode": {
+        "type": "object",
+        "properties": {
+          "port": {
+            "type": "number"
           }
         }
       }

@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, Put, UseBefore} from "routing-controllers"
+import {Body, Controller, Delete, Get, Param, Post, Put, UseBefore} from "routing-controllers"
 import "reflect-metadata";
 import {removeCors} from "../middleware";
 import {AppRoutes} from "../constants";
@@ -29,5 +29,10 @@ export class NodesController {
             url: body.url
         });
         return audioNodesService.getActiveNodes();
+    }
+
+    @Delete(`${AppRoutes.NODES}/:${NodesRoutes.NODE_TYPE}`)
+    killNode(@Param(NodesRoutes.NODE_TYPE) id: NodeType, @Body() body: { port: number }): Promise<Node[]> {
+        return audioNodesService.killNodeByPort(body.port);
     }
 }

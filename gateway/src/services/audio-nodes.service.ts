@@ -2,6 +2,7 @@ import {Node, NodeType} from "../model";
 import {HttpError} from "routing-controllers";
 
 const {spawn} = require("child_process");
+const kill = require('kill-port')
 
 class AudioNodesService {
 
@@ -18,7 +19,6 @@ class AudioNodesService {
         //console.log(audioProcess.pid);
 
         return new Promise((resolve, reject) => {
-            let created: boolean = false;
 
             audioProcess.stdout.once("data", (data: any) => {
                 console.log(`Audio server: ${data}`);
@@ -28,16 +28,12 @@ class AudioNodesService {
                     url: `http://localhost:${port}`
                 }
                 this.connectNode(newNode);
-                created = true;
                 resolve(newNode);
             });
 
             audioProcess.once("close", (code: any, signal: any) => {
                 //npx kill-port 8080
                 console.log(`Audio process exited with code ${code}`);
-                if (created) {
-                    this.activeNodes = this.activeNodes.filter(node => !node.url.endsWith(port.toString()));
-                }
                 reject(new HttpError(500, `Port already in use`));
             });
         });
@@ -45,6 +41,20 @@ class AudioNodesService {
 
     public connectNode(node: Node): void {
         this.activeNodes.push(node);
+    }
+
+    public killNodeByPort(port: number): Promise<Node[]> {
+        return new Promise((resolve, reject) => {
+            kill(port, "tcp")
+                .then((res: any) => {
+                    if (!res.code) {
+                        this.activeNodes = this.activeNodes.filter(node => !node.url.endsWith(port.toString()));
+                        resolve(this.activeNodes);
+                    } else {
+                        reject(new HttpError(500, `No nodes on port ${port}`));
+                    }
+                })
+        });
     }
 }
 
