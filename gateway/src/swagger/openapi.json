@@ -169,6 +169,16 @@
           }
         ],
         "description": "API to create new active node by type",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNode"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -206,6 +216,14 @@
           },
           "url": {
             "type": "string"
+          }
+        }
+      },
+      "CreateNode": {
+        "type": "object",
+        "properties": {
+          "port": {
+            "type": "number"
           }
         }
       }
