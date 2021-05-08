@@ -196,6 +196,56 @@
           }
         }
       }
+    },
+    "/nodes/{connect-type}": {
+      "put": {
+        "summary": "Connect existing nodes by type",
+        "tags": [
+          "Nodes API functions"
+        ],
+        "parameters": [
+          {
+            "name": "connect-type",
+            "in": "path",
+            "required": true,
+            "description": "node type",
+            "schema": {
+              "type": "string",
+              "enum": ["audio", "recognition"],
+              "example": "audio"
+            }
+          }
+        ],
+        "description": "API to connect existing node by type",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConnectNode"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "document": {
+                "schema": {
+                  "type": "Node[]",
+                  "example": [
+                    {
+                      "type": "audio",
+                      "url": "http://localhost:3000"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -224,6 +274,14 @@
         "properties": {
           "port": {
             "type": "number"
+          }
+        }
+      },
+      "ConnectNode": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
           }
         }
       }

@@ -27,7 +27,7 @@ class AudioNodesService {
                     type: NodeType.AUDIO,
                     url: `http://localhost:${port}`
                 }
-                this.activeNodes.push(newNode);
+                this.connectNode(newNode);
                 created = true;
                 resolve(newNode);
             });
@@ -41,6 +41,10 @@ class AudioNodesService {
                 reject(new HttpError(500, `Port already in use`));
             });
         });
+    }
+
+    public connectNode(node: Node): void {
+        this.activeNodes.push(node);
     }
 }
 
