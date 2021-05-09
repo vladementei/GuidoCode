@@ -14,7 +14,8 @@ class AudioNodesService {
         }
     ];
     //private balancer: Balancer = new RoundRobinBalancer(this.activeNodes);
-    private balancer: Balancer = new LeastConnectionsBalancer(this.activeNodes);
+    //private balancer: Balancer = new LeastConnectionsBalancer(this.activeNodes);
+    private balancer: Balancer = new PowerOf2ChoicesBalancer(this.activeNodes);
 
     public getActiveNodes(): Node[] {
         return this.activeNodes.map(node => {
@@ -135,6 +136,19 @@ class LeastConnectionsBalancer extends Balancer {
             }
         }
         return winner;
+    }
+}
+
+class PowerOf2ChoicesBalancer extends Balancer {
+
+    constructor(protected nodes: LoadedNode[]) {
+        super(nodes);
+    }
+
+    pick(): LoadedNode {
+        const first = this.nodes[Math.trunc(Math.random() * this.nodes.length)];
+        const second = this.nodes[Math.trunc(Math.random() * this.nodes.length)];
+        return first.loaded <= second.loaded ? first : second;
     }
 }
 
