@@ -13,6 +13,7 @@ class AudioNodesService {
             loaded: 0
         }
     ];
+    private balancer: Balancer = new RoundRobinBalancer(this.activeNodes);
 
     public getActiveNodes(): Node[] {
         return this.activeNodes.map(node => {
@@ -60,7 +61,7 @@ class AudioNodesService {
         return new Promise((resolve, reject) => {
             kill(port, "tcp")
                 .then((res: any) => {
-                    this.activeNodes = this.activeNodes.filter(node => !node.url.endsWith(port.toString()));
+                    this.removeNodeByPort(port);
                     if (!res.code) {
                         resolve(this.getActiveNodes());
                     } else {
@@ -70,8 +71,13 @@ class AudioNodesService {
         });
     }
 
+    public removeNodeByPort(port: number): void {
+        this.activeNodes = this.activeNodes.filter(node => !node.url.endsWith(port.toString()));
+        this.balancer.setNodes(this.activeNodes);
+    }
+
     public getActiveNode(): LoadedNode {
-        return this.activeNodes[0];
+        return this.balancer.pick();
     }
 
     public increaseLoading(node: LoadedNode): void {
@@ -83,6 +89,30 @@ class AudioNodesService {
         node.loaded--;
         console.log(node);
     }
+}
+
+interface Balancer {
+    pick(): LoadedNode;
+
+    setNodes(nodes: LoadedNode[]): void;
+}
+
+class RoundRobinBalancer implements Balancer {
+    private currentIndex: number = -1;
+
+    constructor(private nodes: LoadedNode[]) {
+    }
+
+    pick(): LoadedNode {
+        this.currentIndex = (this.currentIndex + 1) % this.nodes.length;
+        console.log(this.currentIndex);
+        return this.nodes[this.currentIndex];
+    }
+
+    setNodes(nodes: LoadedNode[]): void {
+        this.nodes = nodes;
+    }
+
 }
 
 export const audioNodesService = new AudioNodesService();
