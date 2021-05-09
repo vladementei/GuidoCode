@@ -91,16 +91,23 @@ class AudioNodesService {
     }
 }
 
-interface Balancer {
-    pick(): LoadedNode;
+abstract class Balancer {
 
-    setNodes(nodes: LoadedNode[]): void;
+    protected constructor(protected nodes: LoadedNode[]) {
+    }
+
+    abstract pick(): LoadedNode;
+
+    setNodes(nodes: LoadedNode[]): void {
+        this.nodes = nodes;
+    }
 }
 
-class RoundRobinBalancer implements Balancer {
+class RoundRobinBalancer extends Balancer {
     private currentIndex: number = -1;
 
-    constructor(private nodes: LoadedNode[]) {
+    constructor(protected nodes: LoadedNode[]) {
+        super(nodes);
     }
 
     pick(): LoadedNode {
@@ -108,11 +115,6 @@ class RoundRobinBalancer implements Balancer {
         console.log(this.currentIndex);
         return this.nodes[this.currentIndex];
     }
-
-    setNodes(nodes: LoadedNode[]): void {
-        this.nodes = nodes;
-    }
-
 }
 
 export const audioNodesService = new AudioNodesService();
