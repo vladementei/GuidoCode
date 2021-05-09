@@ -7,6 +7,7 @@ import {converter} from "../mocks";
 import {Request, Response} from "express";
 import {UploadedFile} from "express-fileupload";
 import {audioNodesService} from "../services";
+import {LoadedNode} from "../model";
 
 class ConverterRoutes {
     public static readonly ID = "id";
@@ -53,7 +54,10 @@ export class ConverterController {
                     reject(new HttpError(400, `Can't save file ${midiFile.name}; ${err.message}`));
                     return;
                 }
-                resolve(axios.get(`${audioNodesService.getActiveUrl()}/midi/notes/${midiFile.name}`)
+                const node: LoadedNode = audioNodesService.getActiveNode();
+                audioNodesService.increaseLoading(node);
+                resolve(axios.get(`${node.url}/midi/notes/${midiFile.name}`)
+                    .finally(() => audioNodesService.decreaseLoading(node))
                     .then(response => response.data)
                     .catch(({response}) => {
                         throw new AudioServerError(response.data.error);
@@ -65,7 +69,10 @@ export class ConverterController {
     @Post(`${AppRoutes.CONVERTER}/${ConverterRoutes.MIDI}`)
     midiFromNotes(@Body() notes: string) {
         return new Promise((resolve, reject) => {
-            resolve(axios.post(`${audioNodesService.getActiveUrl()}/midi/midi`, notes, {headers: {"Content-Type": "text/plain"}})
+            const node: LoadedNode = audioNodesService.getActiveNode();
+            audioNodesService.increaseLoading(node);
+            resolve(axios.post(`${node.url}/midi/midi`, notes, {headers: {"Content-Type": "text/plain"}})
+                .finally(() => audioNodesService.decreaseLoading(node))
                 .then(response => response.data)
                 .catch(({response}) => {
                     throw new AudioServerError(response.data.error);
