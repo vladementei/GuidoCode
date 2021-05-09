@@ -13,7 +13,8 @@ class AudioNodesService {
             loaded: 0
         }
     ];
-    private balancer: Balancer = new RoundRobinBalancer(this.activeNodes);
+    //private balancer: Balancer = new RoundRobinBalancer(this.activeNodes);
+    private balancer: Balancer = new LeastConnectionsBalancer(this.activeNodes);
 
     public getActiveNodes(): Node[] {
         return this.activeNodes.map(node => {
@@ -114,6 +115,26 @@ class RoundRobinBalancer extends Balancer {
         this.currentIndex = (this.currentIndex + 1) % this.nodes.length;
         console.log(this.currentIndex);
         return this.nodes[this.currentIndex];
+    }
+}
+
+class LeastConnectionsBalancer extends Balancer {
+
+    constructor(protected nodes: LoadedNode[]) {
+        super(nodes);
+    }
+
+    pick(): LoadedNode {
+        let winner = this.nodes[0];
+        for (let node of this.nodes) {
+            if (node.loaded < winner.loaded) {
+                winner = node;
+            }
+            if (!winner.loaded) {
+                return winner;
+            }
+        }
+        return winner;
     }
 }
 
