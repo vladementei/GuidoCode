@@ -6,7 +6,12 @@ const kill = require('kill-port')
 
 class AudioNodesService {
 
-    private activeNodes: Node[] = [];
+    private activeNodes: Node[] = [
+        {
+            type: NodeType.AUDIO,
+            url: "http://localhost:8090"
+        }
+    ];
 
     public getActiveNodes(): Node[] {
         return this.activeNodes;
@@ -55,6 +60,10 @@ class AudioNodesService {
                     }
                 })
         });
+    }
+
+    public getActiveUrl(): string {
+        return this.activeNodes[0].url;
     }
 }
 
