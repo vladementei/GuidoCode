@@ -8,6 +8,8 @@ import {Request, Response} from "express";
 import {UploadedFile} from "express-fileupload";
 import {audioNodesService} from "../services";
 import {LoadedNode} from "../model";
+import {tokenVerificationGuard} from "../middleware/token-verification";
+import {Role} from "../model/role";
 
 class ConverterRoutes {
     public static readonly ID = "id";
@@ -22,7 +24,7 @@ class AudioServerError extends HttpError {
 }
 
 @Controller()
-@UseBefore(removeCors)
+@UseBefore(removeCors, tokenVerificationGuard([Role.ADMIN, Role.ANONYMOUS, Role.USER]))
 // @UseInterceptor((action: Action, content: any) => {
 //     return httpContext.get('project');
 // })

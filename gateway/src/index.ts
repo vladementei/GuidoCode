@@ -11,6 +11,8 @@ import {GlobalErrorHandler} from "./middleware";
 import swaggerUi from "swagger-ui-express";
 import * as swaggerDocument from '../src/swagger/openapi.json';
 import {AppRoutes} from "./constants";
+import axios from "axios";
+import {jwtConfig} from "./middleware/token-verification";
 
 
 dotenv.config();
@@ -45,6 +47,13 @@ app.use((req, res, next) => {
 
 app.get(AppRoutes.ROOT, (req: Request, res: Response) => res.redirect(AppRoutes.API_DOCS));
 
-app.listen(port, () => {
-    logger.info(`⚡️[server]: Server is running at ${process.env.URL}:${port}`);
-});
+axios.get(`http://localhost:8085/authorization/public-key`)
+    .then((response) => {
+        jwtConfig.pk = response.data;
+    })
+    .catch(() => logger.error("Validation token fetching failed"))
+    .finally(() => {
+        app.listen(port, () => {
+            logger.info(`⚡️[server]: Server is running at ${process.env.URL}:${port}`);
+        });
+    })

@@ -4,13 +4,15 @@ import {removeCors} from "../middleware";
 import {AppRoutes} from "../constants";
 import {Node, NodeType} from "../model";
 import {audioNodesService} from "../services";
+import {tokenVerificationGuard} from "../middleware/token-verification";
+import {Role} from "../model/role";
 
 class NodesRoutes {
     public static readonly NODE_TYPE = "type";
 }
 
 @Controller()
-@UseBefore(removeCors)
+@UseBefore(removeCors, tokenVerificationGuard([Role.ADMIN]))
 export class NodesController {
     @Get(`${AppRoutes.NODES}/:${NodesRoutes.NODE_TYPE}`)
     getActiveNodes(@Param(NodesRoutes.NODE_TYPE) id: NodeType): Node[] {
