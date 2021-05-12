@@ -5,15 +5,9 @@ import {Balancer, LeastConnectionsBalancer, PowerOf2ChoicesBalancer, RoundRobinB
 const {spawn} = require("child_process");
 const kill = require('kill-port')
 
-class AudioNodesService {
+class RecognitionNodesService {
 
-    private activeNodes: LoadedNode[] = [
-        {
-            type: NodeType.AUDIO,
-            url: "http://localhost:8090",
-            loaded: 0
-        }
-    ];
+    private activeNodes: LoadedNode[] = [];
     //private balancer: Balancer = new RoundRobinBalancer(this.activeNodes);
     //private balancer: Balancer = new LeastConnectionsBalancer(this.activeNodes);
     private balancer: Balancer = new PowerOf2ChoicesBalancer(this.activeNodes);
@@ -28,26 +22,25 @@ class AudioNodesService {
     }
 
     public createNode(port: number): Promise<Node[]> {
-        const audioProcess = spawn('node', ['../audio/build/index.js', port], {
+        //TODO fix run script
+        const recognitionProcess = spawn('python', ['../recognition/server.py', port], {
             detached: true
         });
-        //console.log(audioProcess.pid);
 
         return new Promise((resolve, reject) => {
 
-            audioProcess.stdout.once("data", (data: any) => {
-                console.log(`Audio server: ${data}`);
-                audioProcess.unref();
+            recognitionProcess.stdout.once("data", (data: any) => {
+                console.log(`Recognition server: ${data}`);
+                recognitionProcess.unref();
                 this.connectNode({
-                    type: NodeType.AUDIO,
+                    type: NodeType.RECOGNITION,
                     url: `http://localhost:${port}`,
                 });
                 resolve(this.getActiveNodes());
             });
 
-            audioProcess.once("close", (code: any, signal: any) => {
-                //npx kill-port 8080
-                console.log(`Audio process exited with code ${code}`);
+            recognitionProcess.once("close", (code: any) => {
+                console.log(`Recognition process exited with code ${code}`);
                 reject(new HttpError(500, `Port already in use`));
             });
         });
@@ -85,13 +78,11 @@ class AudioNodesService {
 
     public increaseLoading(node: LoadedNode): void {
         node.loaded++;
-        console.log(node)
     }
 
     public decreaseLoading(node: LoadedNode): void {
         node.loaded--;
-        console.log(node);
     }
 }
 
-export const audioNodesService = new AudioNodesService();
+export const recognitionNodesService = new RecognitionNodesService();
