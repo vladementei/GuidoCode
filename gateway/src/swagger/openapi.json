@@ -109,6 +109,38 @@
         }
       }
     },
+    "/recognition/midi": {
+      "post": {
+        "summary": "Recognition of music sheet and converting to MIDI",
+        "tags": [
+          "Converter API functions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": "true",
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "required": "true",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "desc",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/nodes/{type}": {
       "get": {
         "summary": "Return active nodes by type",
